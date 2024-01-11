@@ -7,15 +7,6 @@ collision: ""
 material_tag: "tile"
 collision_groups: "default"
 animations {
-  id: "attack-up"
-  start_tile: 29
-  end_tile: 32
-  playback: PLAYBACK_ONCE_FORWARD
-  fps: 30
-  flip_horizontal: 0
-  flip_vertical: 0
-}
-animations {
   id: "attack_left"
   start_tile: 25
   end_tile: 28
@@ -28,6 +19,51 @@ animations {
   id: "attack_left"
   start_tile: 33
   end_tile: 36
+  playback: PLAYBACK_ONCE_FORWARD
+  fps: 30
+  flip_horizontal: 0
+  flip_vertical: 0
+}
+animations {
+  id: "attack_up"
+  start_tile: 29
+  end_tile: 32
+  playback: PLAYBACK_ONCE_FORWARD
+  fps: 30
+  flip_horizontal: 0
+  flip_vertical: 0
+}
+animations {
+  id: "idle_down"
+  start_tile: 19
+  end_tile: 19
+  playback: PLAYBACK_ONCE_FORWARD
+  fps: 30
+  flip_horizontal: 0
+  flip_vertical: 0
+}
+animations {
+  id: "idle_left"
+  start_tile: 13
+  end_tile: 13
+  playback: PLAYBACK_ONCE_FORWARD
+  fps: 30
+  flip_horizontal: 0
+  flip_vertical: 0
+}
+animations {
+  id: "idle_right"
+  start_tile: 1
+  end_tile: 1
+  playback: PLAYBACK_ONCE_FORWARD
+  fps: 30
+  flip_horizontal: 0
+  flip_vertical: 0
+}
+animations {
+  id: "idle_up"
+  start_tile: 7
+  end_tile: 7
   playback: PLAYBACK_ONCE_FORWARD
   fps: 30
   flip_horizontal: 0
