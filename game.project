@@ -12,7 +12,7 @@ height = 360
 input_method = HiddenInputField
 
 [project]
-title = DefoldActionRPG
+title = Defold Action RPG
 
 [graphics]
 default_texture_min_filter = nearest

@@ -1,4 +1,4 @@
-speed = 150
+local max_speed = 150
 
 ---@class PlayerController
 ---@field velocity vector3
@@ -14,22 +14,29 @@ end
 ---@param action table
 function on_input(self, action_id, action)
     if action_id == hash("move_up") then
-        self.velocity.y = speed
+        self.velocity.y = 1
     elseif action_id == hash("move_down") then
-        self.velocity.y = -speed
+        self.velocity.y = -1
     elseif action_id == hash("move_left") then
-        self.velocity.x = -speed
+        self.velocity.x = -1
     elseif action_id == hash("move_right") then
-        self.velocity.x = speed
+        self.velocity.x = 1
     end
 end
 
 ---@param self PlayerController
 ---@param dt float
 function update(self, dt)
-    local position = go.get_position()
+    move(self, dt)
+end
 
-    position = position + self.velocity * dt
+---@param self PlayerController
+---@param dt float
+function move(self, dt)
+    local movement = vmath.normalize(self.velocity) * max_speed * dt
+
+    local position = go.get_position()
+    position = position + movement
     go.set_position(position)
 
     self.velocity = vmath.vector3(0, 0, 0)
