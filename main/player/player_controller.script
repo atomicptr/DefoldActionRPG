@@ -21,14 +21,18 @@ end
 function on_input(self, action_id, action)
     if action.pressed and action_id == hash("move_up") then
         self.input_vector.y = 1
+        sprite.play_flipbook("#sprite", hash("walk_up"))
     elseif action.pressed and action_id == hash("move_down") then
         self.input_vector.y = -1
+        sprite.play_flipbook("#sprite", hash("walk_down"))
     end
 
     if action.pressed and action_id == hash("move_left") then
         self.input_vector.x = -1
+        sprite.play_flipbook("#sprite", hash("walk_left"))
     elseif action.pressed and action_id == hash("move_right") then
         self.input_vector.x = 1
+        sprite.play_flipbook("#sprite", hash("walk_right"))
     end
 
     if action.released and (action_id == hash("move_up") or action_id == hash("move_down")) then
@@ -46,6 +50,7 @@ end
 ---@param dt float
 function update(self, dt)
     if self.input_vector == vmath.vector3() then
+        sprite.play_flipbook("#sprite", hash("idle_right"))
         self.velocity = xvmath.move_toward(self.velocity, vmath.vector3(), FRICTION * dt)
     else
         self.velocity = xvmath.move_toward(self.velocity, self.input_vector * MAX_SPEED, ACCELERATION * dt)

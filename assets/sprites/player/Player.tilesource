@@ -7,11 +7,20 @@ collision: ""
 material_tag: "tile"
 collision_groups: "default"
 animations {
+  id: "attack_down"
+  start_tile: 37
+  end_tile: 40
+  playback: PLAYBACK_ONCE_FORWARD
+  fps: 12
+  flip_horizontal: 0
+  flip_vertical: 0
+}
+animations {
   id: "attack_left"
   start_tile: 25
   end_tile: 28
   playback: PLAYBACK_ONCE_FORWARD
-  fps: 30
+  fps: 12
   flip_horizontal: 0
   flip_vertical: 0
 }
@@ -20,7 +29,7 @@ animations {
   start_tile: 33
   end_tile: 36
   playback: PLAYBACK_ONCE_FORWARD
-  fps: 30
+  fps: 12
   flip_horizontal: 0
   flip_vertical: 0
 }
@@ -29,7 +38,7 @@ animations {
   start_tile: 29
   end_tile: 32
   playback: PLAYBACK_ONCE_FORWARD
-  fps: 30
+  fps: 12
   flip_horizontal: 0
   flip_vertical: 0
 }
@@ -38,7 +47,7 @@ animations {
   start_tile: 19
   end_tile: 19
   playback: PLAYBACK_ONCE_FORWARD
-  fps: 30
+  fps: 12
   flip_horizontal: 0
   flip_vertical: 0
 }
@@ -47,7 +56,7 @@ animations {
   start_tile: 13
   end_tile: 13
   playback: PLAYBACK_ONCE_FORWARD
-  fps: 30
+  fps: 12
   flip_horizontal: 0
   flip_vertical: 0
 }
@@ -56,7 +65,7 @@ animations {
   start_tile: 1
   end_tile: 1
   playback: PLAYBACK_ONCE_FORWARD
-  fps: 30
+  fps: 12
   flip_horizontal: 0
   flip_vertical: 0
 }
@@ -65,7 +74,7 @@ animations {
   start_tile: 7
   end_tile: 7
   playback: PLAYBACK_ONCE_FORWARD
-  fps: 30
+  fps: 12
   flip_horizontal: 0
   flip_vertical: 0
 }
@@ -74,7 +83,7 @@ animations {
   start_tile: 56
   end_tile: 60
   playback: PLAYBACK_ONCE_FORWARD
-  fps: 30
+  fps: 12
   flip_horizontal: 0
   flip_vertical: 0
 }
@@ -83,7 +92,7 @@ animations {
   start_tile: 51
   end_tile: 55
   playback: PLAYBACK_ONCE_FORWARD
-  fps: 30
+  fps: 12
   flip_horizontal: 0
   flip_vertical: 0
 }
@@ -92,7 +101,7 @@ animations {
   start_tile: 41
   end_tile: 45
   playback: PLAYBACK_ONCE_FORWARD
-  fps: 30
+  fps: 12
   flip_horizontal: 0
   flip_vertical: 0
 }
@@ -101,7 +110,7 @@ animations {
   start_tile: 46
   end_tile: 50
   playback: PLAYBACK_ONCE_FORWARD
-  fps: 30
+  fps: 12
   flip_horizontal: 0
   flip_vertical: 0
 }
@@ -109,17 +118,8 @@ animations {
   id: "walk_down"
   start_tile: 19
   end_tile: 24
-  playback: PLAYBACK_ONCE_FORWARD
-  fps: 30
-  flip_horizontal: 0
-  flip_vertical: 0
-}
-animations {
-  id: "walk_down"
-  start_tile: 37
-  end_tile: 40
-  playback: PLAYBACK_ONCE_FORWARD
-  fps: 30
+  playback: PLAYBACK_LOOP_FORWARD
+  fps: 12
   flip_horizontal: 0
   flip_vertical: 0
 }
@@ -127,8 +127,8 @@ animations {
   id: "walk_left"
   start_tile: 13
   end_tile: 18
-  playback: PLAYBACK_ONCE_FORWARD
-  fps: 30
+  playback: PLAYBACK_LOOP_FORWARD
+  fps: 12
   flip_horizontal: 0
   flip_vertical: 0
 }
@@ -136,8 +136,8 @@ animations {
   id: "walk_right"
   start_tile: 1
   end_tile: 6
-  playback: PLAYBACK_ONCE_FORWARD
-  fps: 30
+  playback: PLAYBACK_LOOP_FORWARD
+  fps: 12
   flip_horizontal: 0
   flip_vertical: 0
 }
@@ -145,8 +145,8 @@ animations {
   id: "walk_up"
   start_tile: 7
   end_tile: 12
-  playback: PLAYBACK_ONCE_FORWARD
-  fps: 30
+  playback: PLAYBACK_LOOP_FORWARD
+  fps: 12
   flip_horizontal: 0
   flip_vertical: 0
 }
