@@ -5,6 +5,7 @@ Re-implementation of [Heartbeasts "Godot Action RPG"](https://www.youtube.com/pl
 There is also an article series available here:
 
 * https://atomicptr.dev/blog/defold-action-rpg-porting-the-popular-godot-tutorial-series-part-1
+* https://atomicptr.dev/blog/defold-action-rpg-porting-the-popular-godot-tutorial-series-part-2
 
 ## Assets
 
