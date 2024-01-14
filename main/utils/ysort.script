@@ -1,0 +1,5 @@
+function update()
+    local pos = go.get_position()
+    pos.z = -pos.y * 0.00001
+    go.set_position(pos)
+end
