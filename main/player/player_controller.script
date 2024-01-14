@@ -1,12 +1,12 @@
 local xvmath = require("modules.xvmath")
 
-local ACCELERATION = 10
-local MAX_SPEED = 100
-local FRICTION = 10
+local ACCELERATION = 500
+local MAX_SPEED = 80
+local FRICTION = 500
 
 ---@class PlayerController
 ---@field velocity vector3
----@field input_vector vector3
+---@field input_vector vector3|vector4
 
 ---@param self PlayerController
 function init(self)
@@ -48,11 +48,10 @@ function update(self, dt)
     if self.input_vector == vmath.vector3() then
         self.velocity = xvmath.move_toward(self.velocity, vmath.vector3(), FRICTION * dt)
     else
-        self.velocity = self.velocity + (self.input_vector * ACCELERATION * dt)
-        self.velocity = xvmath.limit_length(self.velocity, MAX_SPEED * dt)
+        self.velocity = xvmath.move_toward(self.velocity, self.input_vector * MAX_SPEED, ACCELERATION * dt)
     end
 
-    move(self.velocity)
+    move(self.velocity * dt)
 end
 
 ---@param movement vector3
