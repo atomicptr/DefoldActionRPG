@@ -2,6 +2,31 @@ local xmath = require("modules.xmath")
 
 local M = {}
 
+---@return vector3
+function M.up()
+    return vmath.vector3(0, 1, 0)
+end
+
+---@return vector3
+function M.down()
+    return vmath.vector3(0, -1, 0)
+end
+
+---@return vector3
+function M.left()
+    return vmath.vector3(-1, 0, 0)
+end
+
+---@return vector3
+function M.right()
+    return vmath.vector3(1, 0, 0)
+end
+
+---@return vector3
+function M.zero()
+    return vmath.vector3(0, 0, 0)
+end
+
 ---@param vec vector3
 ---@param vec_to vector3
 ---@param dt float
