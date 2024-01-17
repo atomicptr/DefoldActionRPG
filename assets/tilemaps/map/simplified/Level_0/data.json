@@ -1,0 +1,17 @@
+{
+	"identifier": "Level_0",
+	"uniqueIdentifer": "0e168450-b0a0-11ee-ac2f-b1586b450bc8",
+	"x": 0,
+	"y": 0,
+	"width": 1216,
+	"height": 944,
+	"bgColor": "#696A79",
+	"neighbourLevels": [],
+	"customFields" : {},
+	"layers": [
+		"Grass.png",
+		"Floor.png",
+		"FloorInt.png"
+	],
+	"entities" : {}
+}
