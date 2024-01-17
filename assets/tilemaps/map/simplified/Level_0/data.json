@@ -11,7 +11,9 @@
 	"layers": [
 		"Grass.png",
 		"Floor.png",
-		"FloorInt.png"
+		"FloorInt.png",
+		"Cliff.png",
+		"CliffInt.png"
 	],
 	"entities" : {}
 }
