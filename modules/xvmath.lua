@@ -55,4 +55,13 @@ function M.limit_length(vec, length)
     return v
 end
 
+---@param v1 vector3
+---@param v2 vector3
+---@return number
+function M.distance(v1, v2)
+    local dx = v1.x - v2.x
+    local dy = v1.y - v2.y
+    return vmath.length(vmath.vector3(dx, dy, 0))
+end
+
 return M
