@@ -1,0 +1,14 @@
+function init(_self)
+	msg.post(".", "acquire_input_focus")
+end
+
+function on_input(self, action_id, action)
+	if action.pressed and action_id == hash("attack") then
+		spawn_animation()
+		go.delete()
+	end
+end
+
+function spawn_animation()
+	factory.create("/grass_effect_spawner#factory", go.get_position())
+end

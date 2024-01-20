@@ -1,0 +1,9 @@
+function init(_self)
+    sprite.play_flipbook("#sprite", hash("anim"), function(_self, message_id, _message, _sender)
+        if message_id ~= hash("animation_done") then
+            return
+        end
+
+        go.delete()
+    end)
+end
