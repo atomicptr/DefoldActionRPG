@@ -16,11 +16,11 @@ key_trigger {
 }
 key_trigger {
   input: KEY_SPACE
-  action: "roll"
+  action: "attack"
 }
 key_trigger {
-  input: KEY_ENTER
-  action: "attack"
+  input: KEY_LSHIFT
+  action: "roll"
 }
 mouse_trigger {
   input: MOUSE_BUTTON_1

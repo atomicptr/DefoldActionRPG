@@ -5,11 +5,17 @@ local ACCELERATION = 500
 local MAX_SPEED = 80
 local FRICTION = 500
 
+local STATE_MOVE = 0
+local STATE_ATTACK = 1
+local STATE_ROLL = 2
+
 ---@class PlayerController
 ---@field velocity vector3
 ---@field input_vector vector3|vector4
 ---@field look_direction vector3
 ---@field anim_tree AnimationTree
+---@field state integer
+---@field animation_playing bool
 
 ---@param self PlayerController
 function init(self)
@@ -17,6 +23,8 @@ function init(self)
     self.velocity = xvmath.zero()
     self.input_vector = xvmath.zero()
     self.look_direction = xvmath.down()
+    self.state = STATE_MOVE
+    self.animation_playing = false
 
     self.anim_tree = AnimationTree.new()
     self.anim_tree:blendspace("idle", {
@@ -31,6 +39,12 @@ function init(self)
         { animation = "walk_left",  value = xvmath.left() },
         { animation = "walk_right", value = xvmath.right() },
     })
+    self.anim_tree:blendspace("attack", {
+        { animation = "attack_up",    value = xvmath.up() },
+        { animation = "attack_down",  value = xvmath.down() },
+        { animation = "attack_left",  value = xvmath.left() },
+        { animation = "attack_right", value = xvmath.right() },
+    })
     self.anim_tree:play("idle")
 end
 
@@ -38,6 +52,10 @@ end
 ---@param action_id userdata
 ---@param action table
 function on_input(self, action_id, action)
+    if not self.state == STATE_MOVE then
+        return
+    end
+
     if action.pressed and action_id == hash("move_up") then
         self.input_vector.y = 1
         self.look_direction = xvmath.up()
@@ -54,6 +72,10 @@ function on_input(self, action_id, action)
         self.look_direction = xvmath.right()
     end
 
+    if action.pressed and action_id == hash("attack") then
+        self.state = STATE_ATTACK
+    end
+
     if action.released and (action_id == hash("move_up") or action_id == hash("move_down")) then
         self.input_vector.y = 0
     elseif action.released and (action_id == hash("move_left") or action_id == hash("move_right")) then
@@ -68,6 +90,18 @@ end
 ---@param self PlayerController
 ---@param dt float
 function update(self, dt)
+    if self.state == STATE_MOVE then
+        move_state(self, dt)
+    elseif self.state == STATE_ATTACK then
+        attack_state(self, dt)
+    elseif self.state == STATE_ROLL then
+        roll_state(self, dt)
+    end
+end
+
+---@param self PlayerController
+---@param dt float
+function move_state(self, dt)
     self.anim_tree:update(self.input_vector, on_animation_changed)
 
     if self.input_vector == xvmath.zero() then
@@ -87,6 +121,41 @@ function move(movement)
     local position = go.get_position()
     position = position + movement
     go.set_position(position)
+end
+
+---@param self PlayerController
+---@param dt float
+function attack_state(self, dt)
+    if self.animation_playing then
+        return
+    end
+
+    self.animation_playing = true
+    self.velocity = xvmath.zero()
+
+    self.anim_tree:play("attack")
+
+    -- we misuse our animation tree a bit here, by changing the state and calling update the animation
+    -- will change to whatever attack animation fits the current input vector and therefore we get the
+    -- correct direction
+    self.anim_tree:update(self.input_vector, function(name)
+        sprite.play_flipbook("#sprite", hash(name), function(self, message_id)
+            if message_id ~= hash("animation_done") then
+                return
+            end
+
+            -- we are no longer animation so we dont need the guard anymore
+            self.animation_playing = false
+
+            self.anim_tree:play("idle")
+            self.state = STATE_MOVE
+        end)
+    end)
+end
+
+---@param self PlayerController
+---@param dt float
+function roll_state(self, dt)
 end
 
 ---@param animation string

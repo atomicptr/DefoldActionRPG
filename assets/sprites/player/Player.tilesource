@@ -17,17 +17,17 @@ animations {
 }
 animations {
   id: "attack_left"
-  start_tile: 25
-  end_tile: 28
+  start_tile: 33
+  end_tile: 36
   playback: PLAYBACK_ONCE_FORWARD
   fps: 12
   flip_horizontal: 0
   flip_vertical: 0
 }
 animations {
-  id: "attack_left"
-  start_tile: 33
-  end_tile: 36
+  id: "attack_right"
+  start_tile: 25
+  end_tile: 28
   playback: PLAYBACK_ONCE_FORWARD
   fps: 12
   flip_horizontal: 0
