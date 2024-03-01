@@ -1,0 +1,17 @@
+local frame_lifetime = 24
+
+---@class SwordHitController
+---@field frames integer
+
+---@param self SwordHitController
+function init(self)
+    self.frames = 0
+end
+
+function update(self, _dt)
+    self.frames = self.frames + 1
+
+    if self.frames >= frame_lifetime then
+        go.delete()
+    end
+end

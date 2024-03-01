@@ -1,6 +1,6 @@
 components {
-  id: "ysort"
-  component: "/main/utils/ysort.script"
+  id: "sword_hit_controller"
+  component: "/main/player/sword_hit_controller.script"
   position {
     x: 0.0
     y: 0.0
@@ -14,21 +14,21 @@ components {
   }
 }
 embedded_components {
-  id: "collisionobject"
+  id: "hitbox"
   type: "collisionobject"
   data: "collision_shape: \"\"\n"
-  "type: COLLISION_OBJECT_TYPE_STATIC\n"
+  "type: COLLISION_OBJECT_TYPE_TRIGGER\n"
   "mass: 0.0\n"
   "friction: 0.1\n"
   "restitution: 0.5\n"
-  "group: \"environment\"\n"
-  "mask: \"player\"\n"
+  "group: \"player_hit\"\n"
+  "mask: \"hitable\"\n"
   "embedded_collision_shape {\n"
   "  shapes {\n"
-  "    shape_type: TYPE_SPHERE\n"
+  "    shape_type: TYPE_BOX\n"
   "    position {\n"
   "      x: 0.0\n"
-  "      y: -2.0\n"
+  "      y: 0.0\n"
   "      z: 0.0\n"
   "    }\n"
   "    rotation {\n"
@@ -38,38 +38,17 @@ embedded_components {
   "      w: 1.0\n"
   "    }\n"
   "    index: 0\n"
-  "    count: 1\n"
+  "    count: 3\n"
   "    id: \"\"\n"
   "  }\n"
-  "  data: 11.254202\n"
+  "  data: 19.0\n"
+  "  data: 10.0\n"
+  "  data: 10.0\n"
   "}\n"
   "linear_damping: 0.0\n"
   "angular_damping: 0.0\n"
   "locked_rotation: false\n"
   "bullet: false\n"
-  ""
-  position {
-    x: 0.0
-    y: 0.0
-    z: 0.0
-  }
-  rotation {
-    x: 0.0
-    y: 0.0
-    z: 0.0
-    w: 1.0
-  }
-}
-embedded_components {
-  id: "sprite"
-  type: "sprite"
-  data: "default_animation: \"Bush\"\n"
-  "material: \"/builtins/materials/sprite.material\"\n"
-  "blend_mode: BLEND_MODE_ALPHA\n"
-  "textures {\n"
-  "  sampler: \"texture_sampler\"\n"
-  "  texture: \"/assets/sprites/world/world.atlas\"\n"
-  "}\n"
   ""
   position {
     x: 0.0

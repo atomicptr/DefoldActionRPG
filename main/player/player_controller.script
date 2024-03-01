@@ -22,7 +22,7 @@ function init(self)
     msg.post(".", "acquire_input_focus")
     self.velocity = xvmath.zero()
     self.input_vector = xvmath.zero()
-    self.look_direction = xvmath.down()
+    self.look_direction = xvmath.up()
     self.state = STATE_MOVE
     self.animation_playing = false
 
@@ -135,6 +135,8 @@ function attack_state(self, dt)
 
     self.anim_tree:play("attack")
 
+    process_sword_hit(self.look_direction)
+
     -- we misuse our animation tree a bit here, by changing the state and calling update the animation
     -- will change to whatever attack animation fits the current input vector and therefore we get the
     -- correct direction
@@ -161,4 +163,21 @@ end
 ---@param animation string
 function on_animation_changed(animation)
     sprite.play_flipbook("#sprite", hash(animation))
+end
+
+---@param direction vector3
+function process_sword_hit(direction)
+    local offset = 20
+
+    -- top is a bit further away so we dont need 20
+    if direction == xvmath.up() then
+        offset = 10
+    end
+
+    local sword_hit_position = go.get_position() + (direction * offset)
+    local id = factory.create("#sword_hit_factory", sword_hit_position)
+
+    if direction == xvmath.left() or direction == xvmath.right() then
+        go.set_rotation(vmath.quat_rotation_z(math.rad(90)), id)
+    end
 end
