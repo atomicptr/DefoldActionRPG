@@ -3,6 +3,7 @@ local AnimationTree = require("modules.animation_tree")
 
 local ACCELERATION = 500
 local MAX_SPEED = 80
+local ROLL_SPEED = 120
 local FRICTION = 500
 
 local STATE_MOVE = 0
@@ -45,6 +46,12 @@ function init(self)
         { animation = "attack_left",  value = xvmath.left() },
         { animation = "attack_right", value = xvmath.right() },
     })
+    self.anim_tree:blendspace("roll", {
+        { animation = "roll_up",    value = xvmath.up() },
+        { animation = "roll_down",  value = xvmath.down() },
+        { animation = "roll_left",  value = xvmath.left() },
+        { animation = "roll_right", value = xvmath.right() },
+    })
     self.anim_tree:play("idle")
 end
 
@@ -74,6 +81,10 @@ function on_input(self, action_id, action)
 
     if action.pressed and action_id == hash("attack") then
         self.state = STATE_ATTACK
+    end
+
+    if action.pressed and action_id == hash("roll") then
+        self.state = STATE_ROLL
     end
 
     if action.released and (action_id == hash("move_up") or action_id == hash("move_down")) then
@@ -158,6 +169,31 @@ end
 ---@param self PlayerController
 ---@param dt float
 function roll_state(self, dt)
+    move(self.velocity * dt)
+
+    if self.animation_playing then
+        return
+    end
+
+    self.animation_playing = true
+    self.velocity = self.look_direction * ROLL_SPEED
+
+    self.anim_tree:play("roll")
+
+    -- see attack state at what type of hack we do here
+    self.anim_tree:update(self.input_vector, function(name)
+        sprite.play_flipbook("#sprite", hash(name), function(self, message_id)
+            if message_id ~= hash("animation_done") then
+                return
+            end
+
+            self.animation_playing = false
+            self.velocity = self.velocity * 0.8
+
+            self.anim_tree:play("idle")
+            self.state = STATE_MOVE
+        end)
+    end)
 end
 
 ---@param animation string
