@@ -159,6 +159,26 @@ instances {
     z: 1.0
   }
 }
+instances {
+  id: "bat"
+  prototype: "/main/enemies/bat.go"
+  position {
+    x: 236.0
+    y: 161.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
 scale_along_z: 0
 embedded_instances {
   id: "bgmap"
@@ -241,6 +261,7 @@ embedded_instances {
   "restitution: 0.5\\n"
   "group: \\\"environment\\\"\\n"
   "mask: \\\"player\\\"\\n"
+  "mask: \\\"enemy\\\"\\n"
   "embedded_collision_shape {\\n"
   "  shapes {\\n"
   "    shape_type: TYPE_BOX\\n"
@@ -429,6 +450,27 @@ embedded_instances {
   children: "grass"
   children: "grass1"
   children: "grass2"
+  data: ""
+  position {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+embedded_instances {
+  id: "enemies"
+  children: "bat"
   data: ""
   position {
     x: 0.0

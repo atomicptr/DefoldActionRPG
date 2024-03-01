@@ -23,6 +23,7 @@ embedded_components {
   "restitution: 0.5\n"
   "group: \"environment\"\n"
   "mask: \"player\"\n"
+  "mask: \"enemy\"\n"
   "embedded_collision_shape {\n"
   "  shapes {\n"
   "    shape_type: TYPE_SPHERE\n"
