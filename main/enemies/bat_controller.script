@@ -4,30 +4,30 @@ local KNOCKBACK_STRENGTH = 120
 local FRICTION = 200
 
 function init(self)
-	self.velocity = xvmath.zero()
+    self.velocity = xvmath.zero()
 end
 
 function on_message(self, message_id, message, sender)
-	local is_hitbox = message.own_group == hash("hitable")
+    local is_hitbox = message.own_group == hash("hitable")
 
-	if is_hitbox and message_id == hash("trigger_response") then
-		local other_pos = go.get_position(message.other_id)
+    if is_hitbox and message_id == hash("trigger_response") then
+        local other_pos = go.get_position(message.other_id)
 
-		local direction = vmath.normalize(go.get_position() - other_pos)
-		direction.z = 0
+        local direction = vmath.normalize(go.get_position() - other_pos)
+        direction.z = 0
 
-		self.velocity = direction * KNOCKBACK_STRENGTH
-	end
+        self.velocity = direction * KNOCKBACK_STRENGTH
+    end
 end
 
 function fixed_update(self, dt)
-	self.velocity = xvmath.move_toward(self.velocity, xvmath.zero(), FRICTION * dt)
-	move(self.velocity * dt)
+    self.velocity = xvmath.move_toward(self.velocity, xvmath.zero(), FRICTION * dt)
+    move(self.velocity * dt)
 end
 
 ---@param movement vector3
 function move(movement)
-	local position = go.get_position()
-	position = position + movement
-	go.set_position(position)
+    local position = go.get_position()
+    position = position + movement
+    go.set_position(position)
 end
