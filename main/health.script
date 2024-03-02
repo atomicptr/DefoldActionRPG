@@ -1,0 +1,47 @@
+---@class Health
+---@field health integer
+---@field max_health integer
+---@field iframe integer
+---@field iframe_duration integer
+
+go.property("max_health", 1)
+go.property("iframe_duration", 30)
+
+---@param self Health
+function init(self)
+    self.health = self.max_health
+    self.iframe = 0
+end
+
+---@param self Health
+---@param message_id userdata
+---@param message any
+---@param sender userdata
+function on_message(self, message_id, message, sender)
+    local iframe_active = self.iframe > 0
+
+    if not iframe_active and message_id == hash("take_damage") then
+        local damage = 1
+
+        if message.damage then
+            damage = message.damage
+        end
+
+        self.health = self.health - damage
+        self.iframe = self.iframe_duration
+    end
+end
+
+---@param self Health
+---@param dt float
+function update(self, dt)
+    local iframe_active = self.iframe > 0
+
+    if iframe_active then
+        self.iframe = self.iframe - 1
+    end
+
+    if self.health <= 0 then
+        msg.post(".", "on_death")
+    end
+end

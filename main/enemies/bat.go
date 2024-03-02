@@ -13,6 +13,26 @@ components {
     w: 1.0
   }
 }
+components {
+  id: "health"
+  component: "/main/health.script"
+  position {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  properties {
+    id: "max_health"
+    value: "3.0"
+    type: PROPERTY_TYPE_NUMBER
+  }
+}
 embedded_components {
   id: "sprite"
   type: "sprite"

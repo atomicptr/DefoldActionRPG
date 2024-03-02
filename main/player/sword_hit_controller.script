@@ -1,4 +1,4 @@
-local frame_lifetime = 24
+local frame_lifetime = 1
 
 ---@class SwordHitController
 ---@field frames integer
@@ -14,4 +14,8 @@ function update(self, _dt)
     if self.frames >= frame_lifetime then
         go.delete()
     end
+end
+
+function on_message(self, message_id, message, sender)
+    msg.post(message.other_id, hash("take_damage"), { damage = go.get("/player#player_controller", "sword_damage") })
 end

@@ -17,6 +17,9 @@ local STATE_ROLL = 2
 ---@field anim_tree AnimationTree
 ---@field state integer
 ---@field animation_playing bool
+---@field sword_damage integer
+
+go.property("sword_damage", 1)
 
 ---@param self PlayerController
 function init(self)

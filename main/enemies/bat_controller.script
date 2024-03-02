@@ -18,6 +18,10 @@ function on_message(self, message_id, message, sender)
 
         self.velocity = direction * KNOCKBACK_STRENGTH
     end
+
+    if message_id == hash("on_death") then
+        go.delete()
+    end
 end
 
 function fixed_update(self, dt)
