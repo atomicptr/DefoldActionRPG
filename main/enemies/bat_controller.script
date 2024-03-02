@@ -2,11 +2,27 @@ local xvmath = require("modules.xvmath")
 
 local KNOCKBACK_STRENGTH = 120
 local FRICTION = 200
+local ACCELERATION = 300
+local MAX_SPEED = 50
 
+local STATE_IDLE = 0
+local STATE_WANDER = 1
+local STATE_CHASE = 2
+
+---@class BatController
+---@field velocity vector3
+---@field state integer
+
+---@param self BatController
 function init(self)
     self.velocity = xvmath.zero()
+    self.state = STATE_IDLE
 end
 
+---@param self BatController
+---@param message_id userdata
+---@param message any
+---@param sender userdata
 function on_message(self, message_id, message, sender)
     local is_hitbox = message.own_group == hash("hitable")
 
@@ -23,11 +39,49 @@ function on_message(self, message_id, message, sender)
         spawn_death_effect()
         go.delete()
     end
+
+    if message_id == hash("found_player") then
+        self.state = STATE_CHASE
+    end
+
+    if message_id == hash("lost_player") then
+        self.state = STATE_IDLE
+    end
 end
 
+---@param self BatController
+---@param dt float
 function fixed_update(self, dt)
+    if self.state == STATE_IDLE then
+        idle_state(self, dt)
+    elseif self.state == STATE_CHASE then
+        chase_state(self, dt)
+    elseif self.state == STATE_WANDER then
+        wander_state(self, dt)
+    end
+
     self.velocity = xvmath.move_toward(self.velocity, xvmath.zero(), FRICTION * dt)
     move(self.velocity * dt)
+end
+
+---@param self BatController
+---@param dt float
+function idle_state(self, dt)
+    self.velocity = xvmath.move_toward(self.velocity, xvmath.zero(), FRICTION * dt)
+end
+
+---@param self BatController
+---@param dt float
+function chase_state(self, dt)
+    local player_position = go.get_position("/player")
+    local direction = vmath.normalize(player_position - go.get_position())
+    self.velocity = xvmath.move_toward(self.velocity, direction * MAX_SPEED, ACCELERATION * dt)
+end
+
+---@param self BatController
+---@param dt float
+function wander_state(self, dt)
+
 end
 
 ---@param movement vector3

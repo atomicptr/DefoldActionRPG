@@ -179,6 +179,46 @@ instances {
     z: 1.0
   }
 }
+instances {
+  id: "bat1"
+  prototype: "/main/enemies/bat.go"
+  position {
+    x: 479.0
+    y: 326.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "bat2"
+  prototype: "/main/enemies/bat.go"
+  position {
+    x: 68.0
+    y: 366.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
 scale_along_z: 0
 embedded_instances {
   id: "bgmap"
@@ -431,6 +471,8 @@ embedded_instances {
 embedded_instances {
   id: "enemies"
   children: "bat"
+  children: "bat1"
+  children: "bat2"
   data: ""
   position {
     x: 0.0

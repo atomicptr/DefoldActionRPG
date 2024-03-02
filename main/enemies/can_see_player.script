@@ -1,0 +1,33 @@
+---@class CanSeePlayer
+---@field seen_player_frames integer
+---@field has_seen_player boolean
+---@field remember_player_duration_frames integer
+
+go.property("remember_player_duration_frames", 60)
+
+---@param self CanSeePlayer
+function init(self)
+    self.seen_player_frames = 0
+    self.has_seen_player = false
+end
+
+---@param self CanSeePlayer
+---@param message_id userdata
+---@param message any
+---@param sender userdata
+function on_message(self, message_id, message, sender)
+    if message.other_group == hash("player") then
+        self.seen_player_frames = self.remember_player_duration_frames
+        self.has_seen_player = true
+        msg.post(".", "found_player")
+    end
+
+    if self.seen_player_frames > 0 then
+        self.seen_player_frames = self.seen_player_frames - 1
+    end
+
+    if self.seen_player_frames <= 0 and self.has_seen_player then
+        self.has_seen_player = false
+        msg.post(".", "lost_player")
+    end
+end
