@@ -21,7 +21,7 @@ embedded_components {
   "blend_mode: BLEND_MODE_ALPHA\n"
   "textures {\n"
   "  sampler: \"texture_sampler\"\n"
-  "  texture: \"/assets/sprites/effects/GrassEffect.tilesource\"\n"
+  "  texture: \"/assets/sprites/effects/HitEffect.tilesource\"\n"
   "}\n"
   ""
   position {

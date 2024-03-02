@@ -3,9 +3,11 @@
 ---@field max_health integer
 ---@field iframe integer
 ---@field iframe_duration integer
+---@field show_hit_effect boolean
 
 go.property("max_health", 1)
 go.property("iframe_duration", 30)
+go.property("show_hit_effect", true)
 
 ---@param self Health
 function init(self)
@@ -29,6 +31,10 @@ function on_message(self, message_id, message, sender)
 
         self.health = self.health - damage
         self.iframe = self.iframe_duration
+
+        if self.show_hit_effect then
+            spawn_hit_effect()
+        end
     end
 end
 
@@ -44,4 +50,8 @@ function update(self, dt)
     if self.health <= 0 then
         msg.post(".", "on_death")
     end
+end
+
+function spawn_hit_effect()
+    factory.create("/hit_effect_spawner#factory", go.get_position())
 end

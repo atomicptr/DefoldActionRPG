@@ -20,6 +20,7 @@ function on_message(self, message_id, message, sender)
     end
 
     if message_id == hash("on_death") then
+        spawn_death_effect()
         go.delete()
     end
 end
@@ -34,4 +35,8 @@ function move(movement)
     local position = go.get_position()
     position = position + movement
     go.set_position(position)
+end
+
+function spawn_death_effect()
+    factory.create("/enemy_death_effect_spawner#factory", go.get_position())
 end

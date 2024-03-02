@@ -1,5 +1,5 @@
 function on_message(self, message_id, message, sender)
-    if message_id == hash("trigger_response") then
+    if message_id == hash("on_death") then
         spawn_animation()
         go.delete()
     end
