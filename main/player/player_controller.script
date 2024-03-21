@@ -82,11 +82,11 @@ function on_input(self, action_id, action)
         self.look_direction = xvmath.right()
     end
 
-    if action.pressed and action_id == hash("attack") then
+    if action.pressed and not self.animation_playing and action_id == hash("attack") then
         self.state = STATE_ATTACK
     end
 
-    if action.pressed and action_id == hash("roll") then
+    if action.pressed and not self.animation_playing and action_id == hash("roll") then
         self.state = STATE_ROLL
     end
 

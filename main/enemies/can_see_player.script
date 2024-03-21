@@ -21,7 +21,9 @@ function on_message(self, message_id, message, sender)
         self.has_seen_player = true
         msg.post(".", "found_player")
     end
+end
 
+function fixed_update(self, dt)
     if self.seen_player_frames > 0 then
         self.seen_player_frames = self.seen_player_frames - 1
     end
