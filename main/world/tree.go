@@ -14,6 +14,29 @@ components {
   }
 }
 embedded_components {
+  id: "sprite"
+  type: "sprite"
+  data: "default_animation: \"Tree\"\n"
+  "material: \"/builtins/materials/sprite.material\"\n"
+  "blend_mode: BLEND_MODE_ALPHA\n"
+  "textures {\n"
+  "  sampler: \"texture_sampler\"\n"
+  "  texture: \"/assets/sprites/world/world.atlas\"\n"
+  "}\n"
+  ""
+  position {
+    x: 0.0
+    y: 16.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+}
+embedded_components {
   id: "collisionobject"
   type: "collisionobject"
   data: "collision_shape: \"\"\n"
@@ -29,7 +52,7 @@ embedded_components {
   "    shape_type: TYPE_SPHERE\n"
   "    position {\n"
   "      x: 0.0\n"
-  "      y: -2.0\n"
+  "      y: 2.0\n"
   "      z: 0.0\n"
   "    }\n"
   "    rotation {\n"
@@ -42,7 +65,7 @@ embedded_components {
   "    count: 1\n"
   "    id: \"\"\n"
   "  }\n"
-  "  data: 11.254202\n"
+  "  data: 10.115145\n"
   "}\n"
   "linear_damping: 0.0\n"
   "angular_damping: 0.0\n"
@@ -62,30 +85,7 @@ embedded_components {
   }
 }
 embedded_components {
-  id: "sprite"
-  type: "sprite"
-  data: "default_animation: \"Bush\"\n"
-  "material: \"/builtins/materials/sprite.material\"\n"
-  "blend_mode: BLEND_MODE_ALPHA\n"
-  "textures {\n"
-  "  sampler: \"texture_sampler\"\n"
-  "  texture: \"/assets/sprites/world/world.atlas\"\n"
-  "}\n"
-  ""
-  position {
-    x: 0.0
-    y: 0.0
-    z: 0.0
-  }
-  rotation {
-    x: 0.0
-    y: 0.0
-    z: 0.0
-    w: 1.0
-  }
-}
-embedded_components {
-  id: "sprite1"
+  id: "shadow"
   type: "sprite"
   data: "default_animation: \"LargeShadow\"\n"
   "material: \"/builtins/materials/sprite.material\"\n"
@@ -97,7 +97,7 @@ embedded_components {
   ""
   position {
     x: 0.0
-    y: -6.0
+    y: -5.0
     z: -0.001
   }
   rotation {

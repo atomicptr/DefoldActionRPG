@@ -1,6 +1,26 @@
+local NUM_HEARTS = 4
+
+---@param self any
+---@param message_id userdata
+---@param message table
+---@param sender userdata
 function on_message(self, message_id, message, sender)
     if message_id == hash("update_health") then
-        local node = gui.get_node("health_text")
-        gui.set_text(node, string.format("HP: %s", message.value))
+        set_hearts(self, message.value)
+    end
+end
+
+---@param self any
+---@param value integer
+function set_hearts(self, value)
+    for i = 1, NUM_HEARTS do
+        local is_heart_full = false
+
+        if i <= value then
+            is_heart_full = true
+        end
+
+        local heart_node = gui.get_node(string.format("heart_%s_full", i))
+        gui.set_visible(heart_node, is_heart_full)
     end
 end
