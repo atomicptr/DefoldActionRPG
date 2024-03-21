@@ -1,0 +1,6 @@
+function on_message(self, message_id, message, sender)
+    if message_id == hash("update_health") then
+        local node = gui.get_node("health_text")
+        gui.set_text(node, string.format("HP: %s", message.value))
+    end
+end

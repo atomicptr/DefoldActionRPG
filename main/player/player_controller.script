@@ -111,6 +111,10 @@ function on_message(self, message_id, message, sender)
     if message_id == hash("on_death") then
         go.delete()
     end
+
+    if message_id == hash("updated_health") then
+        msg.post("/gui", "update_health", { value = message.value })
+    end
 end
 
 ---@param self PlayerController

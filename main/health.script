@@ -13,6 +13,8 @@ go.property("show_hit_effect", true)
 function init(self)
     self.health = self.max_health
     self.iframe = 0
+
+    msg.post(".", "updated_health", { value = self.health })
 end
 
 ---@param self Health
@@ -35,6 +37,8 @@ function on_message(self, message_id, message, sender)
         if self.show_hit_effect then
             spawn_hit_effect()
         end
+
+        msg.post(".", "updated_health", { value = self.health })
     end
 end
 
