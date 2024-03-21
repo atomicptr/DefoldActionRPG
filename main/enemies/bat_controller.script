@@ -25,6 +25,7 @@ end
 ---@param sender userdata
 function on_message(self, message_id, message, sender)
     local is_hitbox = message.own_group == hash("hitable")
+    local is_hurtbox = message.own_group == hash("enemy_hit")
 
     if is_hitbox and message_id == hash("trigger_response") then
         local other_pos = go.get_position(message.other_id)
@@ -32,7 +33,12 @@ function on_message(self, message_id, message, sender)
         local direction = vmath.normalize(go.get_position() - other_pos)
         direction.z = 0
 
+        ---@cast direction vector3
         self.velocity = direction * KNOCKBACK_STRENGTH
+    end
+
+    if is_hurtbox and message_id == hash("collision_response") then
+        msg.post(message.other_id, "take_damage")
     end
 
     if message_id == hash("on_death") then
@@ -73,8 +79,14 @@ end
 ---@param self BatController
 ---@param dt float
 function chase_state(self, dt)
+    -- after the player has died, the bat will not do anything anymore
+    if not go.exists("/player") then
+        self.state = STATE_IDLE
+        return
+    end
     local player_position = go.get_position("/player")
     local direction = vmath.normalize(player_position - go.get_position())
+    ---@cast direction vector3
     self.velocity = xvmath.move_toward(self.velocity, direction * MAX_SPEED, ACCELERATION * dt)
 end
 

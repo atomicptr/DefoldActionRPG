@@ -197,3 +197,5 @@ $RECYCLE.BIN/
 
 # End of https://www.toptal.com/developers/gitignore/api/windows,macos,linux,defold,visualstudiocode,intellij+all
 
+
+/.defold/api

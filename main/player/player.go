@@ -28,6 +28,31 @@ components {
     w: 1.0
   }
 }
+components {
+  id: "health"
+  component: "/main/health.script"
+  position {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  properties {
+    id: "max_health"
+    value: "4.0"
+    type: PROPERTY_TYPE_NUMBER
+  }
+  properties {
+    id: "iframe_duration"
+    value: "60.0"
+    type: PROPERTY_TYPE_NUMBER
+  }
+}
 embedded_components {
   id: "collisionobject"
   type: "collisionobject"
@@ -114,7 +139,7 @@ embedded_components {
   "    shape_type: TYPE_SPHERE\n"
   "    position {\n"
   "      x: 0.0\n"
-  "      y: -5.0\n"
+  "      y: 0.0\n"
   "      z: 0.0\n"
   "    }\n"
   "    rotation {\n"
@@ -127,7 +152,7 @@ embedded_components {
   "    count: 1\n"
   "    id: \"\"\n"
   "  }\n"
-  "  data: 7.443609\n"
+  "  data: 9.0\n"
   "}\n"
   "linear_damping: 0.0\n"
   "angular_damping: 0.0\n"
