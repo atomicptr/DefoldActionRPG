@@ -163,8 +163,8 @@ instances {
   id: "bat"
   prototype: "/main/enemies/bat.go"
   position {
-    x: 236.0
-    y: 161.0
+    x: 197.0
+    y: 220.0
     z: 0.0
   }
   rotation {
@@ -203,8 +203,8 @@ instances {
   id: "bat2"
   prototype: "/main/enemies/bat.go"
   position {
-    x: 157.0
-    y: 218.0
+    x: 171.0
+    y: 230.0
     z: 0.0
   }
   rotation {
@@ -252,6 +252,34 @@ instances {
     y: 0.0
     z: 0.0
     w: 1.0
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "camera"
+  prototype: "/main/player/camera.go"
+  position {
+    x: 0.0
+    y: 0.0
+    z: 1.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  component_properties {
+    id: "camera_controller"
+    properties {
+      id: "follow_go"
+      value: "/player"
+      type: PROPERTY_TYPE_URL
+    }
   }
   scale3 {
     x: 1.0
