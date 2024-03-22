@@ -41,6 +41,12 @@ function on_message(self, message_id, message, sender)
         msg.post(message.other_id, "take_damage")
     end
 
+    if message_id == hash("collision_response") and message.own_group == hash("soft_collisions") then
+        local pos = go.get_position()
+        local direction = xvmath.direction_to(message.other_position, pos)
+        self.velocity = self.velocity + direction * 10
+    end
+
     if message_id == hash("on_death") then
         spawn_death_effect()
         go.delete()

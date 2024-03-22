@@ -42,6 +42,15 @@ function M.move_toward(vec, vec_to, dt)
 end
 
 ---@param vec vector3
+---@param vec_to vector3
+---@return vector3
+function M.direction_to(vec, vec_to)
+    local new_vec = vmath.normalize(vec_to - vec)
+    ---@cast new_vec vector3
+    return new_vec
+end
+
+---@param vec vector3
 ---@param length number
 ---@return vector3
 function M.limit_length(vec, length)
