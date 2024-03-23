@@ -1,17 +1,60 @@
 ---@class CameraController
 ---@field follow_go url
+---@field bounds vector4
+---@field display_size vector3
+---@field tilemap_width number
+---@field tilemap_height number
+---@field tile_size number
+---@field z number
 
 go.property("follow_go", msg.url())
+
+-- tilemap
+go.property("tilemap_width", 32)
+go.property("tilemap_height", 32)
+go.property("tile_size", 16)
 
 ---@param self CameraController
 function init(self)
     msg.post("@render:", "use_camera_projection")
     msg.post("#camera", "acquire_camera_focus")
+
+    local level_pos = go.get_position("/bgmap")
+
+    self.bounds = vmath.vector4(
+        level_pos.x + self.tile_size,
+        level_pos.y + self.tile_size,
+        level_pos.x + (self.tilemap_width * self.tile_size),
+        level_pos.y + (self.tilemap_height * self.tile_size)
+    )
+
+    local zoom = go.get("#camera", "orthographic_zoom")
+    self.display_size = vmath.vector3(
+        sys.get_config_number("display.width") / zoom,
+        sys.get_config_number("display.height") / zoom,
+        0
+    )
+
+    self.z = go.get_position().z
 end
 
 ---@param self CameraController
 function final(self)
     msg.post("#camera", "release_camera_focus")
+end
+
+---@param self CameraController
+---@param pos vector3
+function limit(self, pos)
+    local left = self.bounds.x + self.display_size.x / 2
+    local right = self.bounds.z - self.display_size.x / 2
+    local top = self.bounds.w - self.display_size.y / 2
+    local bottom = self.bounds.y + self.display_size.y / 2
+    pos.x = math.min(pos.x, right)
+    pos.x = math.max(pos.x, left)
+    pos.y = math.min(pos.y, top)
+    pos.y = math.max(pos.y, bottom)
+    return pos
 end
 
 ---@param self CameraController
@@ -22,5 +65,5 @@ function update(self, dt)
 
     -- keep our own Z position
     go_pos.z = pos.z
-    go.set_position(go_pos)
+    go.set_position(limit(self, go_pos))
 end
