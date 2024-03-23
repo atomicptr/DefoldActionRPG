@@ -39,6 +39,12 @@ function on_message(self, message_id, message, sender)
         end
 
         msg.post(".", "updated_health", { value = self.health })
+        start_iframe_animation()
+    end
+
+    if message_id == hash("start_iframe") then
+        self.iframe = message.iframe_duration or self.iframe_duration
+        start_iframe_animation()
     end
 end
 
@@ -51,6 +57,10 @@ function update(self, dt)
         self.iframe = self.iframe - 1
     end
 
+    if self.iframe <= 0 then
+        stop_iframe_animation()
+    end
+
     if self.health <= 0 then
         msg.post(".", "on_death")
     end
@@ -58,4 +68,12 @@ end
 
 function spawn_hit_effect()
     factory.create("/hit_effect_spawner#factory", go.get_position())
+end
+
+function start_iframe_animation()
+    go.animate("#sprite", "tint.w", go.PLAYBACK_ONCE_FORWARD, 2, go.EASING_LINEAR, 0.1)
+end
+
+function stop_iframe_animation()
+    go.animate("#sprite", "tint.w", go.PLAYBACK_ONCE_FORWARD, 1, go.EASING_LINEAR, 0.1)
 end

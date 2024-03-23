@@ -201,6 +201,8 @@ function roll_state(self, dt)
 
     sound.play("#sound_evade")
 
+    msg.post(".", "start_iframe")
+
     self.anim_tree:play("roll")
 
     -- see attack state at what type of hack we do here
