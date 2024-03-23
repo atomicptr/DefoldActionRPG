@@ -163,6 +163,8 @@ function attack_state(self, dt)
     self.animation_playing = true
     self.velocity = xvmath.zero()
 
+    sound.play("#sound_swipe")
+
     self.anim_tree:play("attack")
 
     process_sword_hit(self.look_direction)
@@ -196,6 +198,8 @@ function roll_state(self, dt)
 
     self.animation_playing = true
     self.velocity = self.look_direction * ROLL_SPEED
+
+    sound.play("#sound_evade")
 
     self.anim_tree:play("roll")
 

@@ -1,4 +1,14 @@
-function init(_self)
+---@class EffectController
+---@field has_sound boolean
+
+go.property("has_sound", false)
+
+---@param self EffectController
+function init(self)
+    if self.has_sound then
+        sound.play("#sound")
+    end
+
     sprite.play_flipbook("#sprite", hash("anim"), function(_self, message_id, _message, _sender)
         if message_id ~= hash("animation_done") then
             return

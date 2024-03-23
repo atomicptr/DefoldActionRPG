@@ -152,7 +152,7 @@ embedded_components {
   "    count: 1\n"
   "    id: \"\"\n"
   "  }\n"
-  "  data: 9.0\n"
+  "  data: 6.0\n"
   "}\n"
   "linear_damping: 0.0\n"
   "angular_damping: 0.0\n"
@@ -205,6 +205,52 @@ embedded_components {
     x: 0.0
     y: -11.0
     z: -0.001
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+}
+embedded_components {
+  id: "sound_swipe"
+  type: "sound"
+  data: "sound: \"/assets/audio/Swipe.wav\"\n"
+  "looping: 0\n"
+  "group: \"master\"\n"
+  "gain: 1.0\n"
+  "pan: 0.0\n"
+  "speed: 1.0\n"
+  "loopcount: 0\n"
+  ""
+  position {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+}
+embedded_components {
+  id: "sound_evade"
+  type: "sound"
+  data: "sound: \"/assets/audio/Evade.wav\"\n"
+  "looping: 0\n"
+  "group: \"master\"\n"
+  "gain: 1.0\n"
+  "pan: 0.0\n"
+  "speed: 1.0\n"
+  "loopcount: 0\n"
+  ""
+  position {
+    x: 0.0
+    y: 0.0
+    z: 0.0
   }
   rotation {
     x: 0.0
