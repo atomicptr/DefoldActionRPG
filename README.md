@@ -8,6 +8,7 @@ There is also an article series available here:
 * https://atomicptr.dev/blog/defold-action-rpg-porting-the-popular-godot-tutorial-series-part-2
 * https://atomicptr.dev/blog/defold-action-rpg-porting-the-popular-godot-tutorial-series-part-3
 * https://atomicptr.dev/blog/defold-action-rpg-porting-the-popular-godot-tutorial-series-part-4
+* https://atomicptr.dev/blog/defold-action-rpg-porting-the-popular-godot-tutorial-series-part-5
 
 ## Assets
 
