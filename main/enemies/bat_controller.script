@@ -1,9 +1,13 @@
 local xvmath = require("modules.xvmath")
+local rng = require("modules.rng")
 
 local KNOCKBACK_STRENGTH = 120
 local FRICTION = 200
 local ACCELERATION = 300
 local MAX_SPEED = 50
+
+local WANDER_RANGE = 32
+local WANDER_TARGET_RANGE = 4
 
 local STATE_IDLE = 0
 local STATE_WANDER = 1
@@ -12,11 +16,17 @@ local STATE_CHASE = 2
 ---@class BatController
 ---@field velocity vector3
 ---@field state integer
+---@field start_position vector3
+---@field target_position vector3
+---@field wander_timer userdata|nil
 
 ---@param self BatController
 function init(self)
     self.velocity = xvmath.zero()
-    self.state = STATE_IDLE
+    self.start_position = go.get_position()
+    self.target_position = self.start_position
+
+    update_wander(self)
 end
 
 ---@param self BatController
@@ -73,6 +83,12 @@ function fixed_update(self, dt)
     end
 
     self.velocity = xvmath.move_toward(self.velocity, xvmath.zero(), FRICTION * dt)
+
+    -- make the bat face the direction it moved to
+    if vmath.length(self.velocity) > 0 then
+        sprite.set_hflip("#sprite", self.velocity.x < 0)
+    end
+
     move(self.velocity * dt)
 end
 
@@ -80,6 +96,10 @@ end
 ---@param dt float
 function idle_state(self, dt)
     self.velocity = xvmath.move_toward(self.velocity, xvmath.zero(), FRICTION * dt)
+
+    if not timer.get_info(self.wander_timer) then
+        update_wander(self)
+    end
 end
 
 ---@param self BatController
@@ -99,7 +119,17 @@ end
 ---@param self BatController
 ---@param dt float
 function wander_state(self, dt)
+    if not timer.get_info(self.wander_timer) then
+        update_wander(self)
+    end
 
+    local direction = vmath.normalize(self.target_position - go.get_position())
+    ---@cast direction vector3
+    self.velocity = xvmath.move_toward(self.velocity, direction * MAX_SPEED, ACCELERATION * dt)
+
+    if xvmath.distance(go.get_position(), self.target_position) <= WANDER_TARGET_RANGE then
+        update_wander(self)
+    end
 end
 
 ---@param movement vector3
@@ -111,4 +141,23 @@ end
 
 function spawn_death_effect()
     factory.create("/enemy_death_effect_spawner#factory", go.get_position())
+end
+
+---@param self BatController
+---@param duration float
+---@return userdata
+function create_wander_timer(self, duration)
+    return timer.delay(duration, false, function()
+        self.target_position = self.start_position + vmath.vector3(
+            math.random(-WANDER_RANGE, WANDER_RANGE),
+            math.random(-WANDER_RANGE, WANDER_RANGE),
+            self.start_position.z
+        )
+    end)
+end
+
+---@param self BatController
+function update_wander(self)
+    self.state = rng.pick_random({ STATE_IDLE, STATE_WANDER })
+    self.wander_timer = create_wander_timer(self, math.random(1.0, 3.0))
 end
